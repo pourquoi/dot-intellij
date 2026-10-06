@@ -1,0 +1,216 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+let mapleader = " "
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+" Vim keys in Project tree
+set NERDTree
+" Which-Key popup (needs the Which-Key plugin)
+set which-key
+set notimeout
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" map <leader>y "*y
+" map <leader>p "*p
+set clipboard+=unnamedplus
+
+
+
+" Let IdeaVim win these in normal mode so pane navigation isn't swallowed.
+sethandler <C-h> n:vim
+sethandler <C-j> n:vim
+sethandler <C-k> n:vim
+sethandler <C-l> n:vim
+
+" Tab navigation
+nmap <C-p> <Action>(PreviousTab)
+nmap <C-n> <Action>(NextTab)
+
+" Pane navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+
+" Jumplist navigation
+" NOTE: <C-i> is the SAME keycode as <Tab>. C-o -> Back and C-i (Tab) -> Forward
+" matches the native Vim jumplist direction.
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" Jump between methods
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
+
+" LSP-style bare keys
+" (gd overrides native go-to-local-declaration; gi overrides native
+"  insert-at-last-position. Use `gi`'s native behavior via `` `^ `` if needed.)
+nmap K  <Action>(QuickJavaDoc)
+nmap gd <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(FindUsages)
+nmap gy <Action>(GotoTypeDeclaration)
+
+" Show these bare-g mappings as readable labels in the which-key popup
+" (they already appear there because they are defined in this file).
+let g:WhichKeyDesc_g = "g Go To / LSP"
+let g:WhichKeyDesc_g_declaration = "gd Go To Declaration"
+let g:WhichKeyDesc_g_implementation = "gi Go To Implementation"
+let g:WhichKeyDesc_g_references = "gr Find Usages"
+let g:WhichKeyDesc_g_type = "gy Go To Type Declaration"
+
+nmap <leader>T <Action>(ActivateTerminalToolWindow)
+let g:WhichKeyDesc_terminal = "<leader>T Terminal"
+
+" Window splits
+nmap <leader>wv <Action>(SplitVertically)
+nmap <leader>wh <Action>(SplitHorizontally)
+nmap <leader>wu <Action>(Unsplit)
+nmap <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+nmap <leader>wb <Action>(Back)
+nmap <leader>wf <Action>(Forward)
+let g:WhichKeyDesc_window = "<leader>w Window splits"
+let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
+let g:WhichKeyDesc_window_split_horizontally = "<leader>wh Split horizontally"
+let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
+let g:WhichKeyDesc_window_split_move_editor = "<leader>wm Move editor to opposite tab group"
+let g:WhichKeyDesc_window_split_back = "<leader>wb Back split"
+let g:WhichKeyDesc_window_split_forward = "<leader>wf Forward split"
+
+nmap <leader>q <Action>(CloseContent)
+
+" Display options
+map <leader>Dd <Action>(ToggleDistractionFreeMode)
+map <leader>Dz <Action>(ToggleZenMode)
+map <leader>Df <Action>(ToggleFullScreen)
+let g:WhichKeyDesc_display = "<leader>D Display options"
+let g:WhichKeyDesc_zen_mode = "<leader>Dz Toggle Zen mode"
+let g:WhichKeyDesc_df_mode = "<leader>Dd Toggle Distraction-Free mode"
+let g:WhichKeyDesc_fullscreen = "<leader>Df Toggle full screen"
+
+" Language / refactoring actions
+nmap <leader>ll <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>lr <Action>(RenameElement)
+nmap <leader>lc <Action>(ChangeSignature)
+nmap <leader>lv <Action>(IntroduceVariable)
+nmap <leader>li <Action>(Inline)
+nmap <leader>lf <Action>(IntroduceField)
+nmap <leader>lm <Action>(ExtractMethod)
+nmap <leader>lC <Action>(IntroduceConstant)
+nmap <leader>lp <Action>(IntroduceParameter)
+nmap <leader>lo <Action>(IntroduceParameterObject)
+nmap <leader>le <Action>(EncapsulateFields)
+nmap <leader>la <Action>(ShowIntentionActions)
+nmap <leader>lR <Action>(ReformatCode)
+nmap <leader>lI <Action>(InspectCode)
+nmap <leader>lG <Action>(Generate)
+let g:WhichKeyDesc_language = "<leader>l Language"
+let g:WhichKeyDesc_language_menu = "<leader>ll Quick List"
+let g:WhichKeyDesc_language_rename = "<leader>lr Rename"
+let g:WhichKeyDesc_language_change_signature = "<leader>lc Change Signature"
+let g:WhichKeyDesc_language_introduce_variable = "<leader>lv Introduce Variable"
+let g:WhichKeyDesc_language_inline_variable = "<leader>li Inline"
+let g:WhichKeyDesc_language_introduce_field = "<leader>lf Introduce Field"
+let g:WhichKeyDesc_language_extract_method = "<leader>lm Extract Method"
+let g:WhichKeyDesc_language_introduce_constant = "<leader>lC Introduce Constant"
+let g:WhichKeyDesc_language_introduce_parameter = "<leader>lp Introduce Parameter"
+let g:WhichKeyDesc_language_introduce_param_object = "<leader>lo Introduce Parameter Object"
+let g:WhichKeyDesc_language_encapsulate = "<leader>le Encapsulate Fields"
+let g:WhichKeyDesc_language_show_intention_actions = "<leader>la Show Intention Actions"
+let g:WhichKeyDesc_language_reformat_code = "<leader>lR Reformat Code"
+let g:WhichKeyDesc_language_inspect_code = "<leader>lI Inspect Code"
+let g:WhichKeyDesc_language_generate = "<leader>lG Generate"
+
+" Go To
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>go <Action>(GotoSuperMethod)
+nmap <leader>gD <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gT <Action>(GotoTest)
+let g:WhichKeyDesc_goto = "<leader>g Go To"
+let g:WhichKeyDesc_goto_declaration = "<leader>gd Go To Declaration"
+let g:WhichKeyDesc_goto_super_method = "<leader>go Go To Super Method"
+let g:WhichKeyDesc_goto_type_declaration = "<leader>gD Go To Type Declaration"
+let g:WhichKeyDesc_goto_implementation = "<leader>gi Go To Implementation"
+let g:WhichKeyDesc_goto_test = "<leader>gT Go To Test"
+
+" Search
+nmap <leader>sS <Action>(SearchEverywhere)
+nmap <leader>su <Action>(FindUsages)
+nmap <leader>sn <Action>(ShowNavBar)
+nmap <leader>sa <Action>(GotoAction)
+nmap <leader>sc <Action>(GotoClass)
+nmap <leader>sf <Action>(GotoFile)
+nmap <leader>ss <Action>(GotoSymbol)
+nmap <leader>st <Action>(TextSearchAction)
+let g:WhichKeyDesc_search = "<leader>s Search"
+let g:WhichKeyDesc_search_everywhere = "<leader>sS Search Everywhere"
+let g:WhichKeyDesc_search_usages = "<leader>su Find Usages"
+let g:WhichKeyDesc_search_nav_bar = "<leader>sn Show Nav Bar"
+let g:WhichKeyDesc_search_action = "<leader>sa Search Action"
+let g:WhichKeyDesc_search_class = "<leader>sc Search Class"
+let g:WhichKeyDesc_search_file = "<leader>sf Search File"
+let g:WhichKeyDesc_search_symbol = "<leader>ss Search Symbol"
+let g:WhichKeyDesc_search_text = "<leader>st Search Text"
+
+" Yank file reference
+function! YankRef(first, last) abort
+  action CopyAbsolutePath
+  if a:first == a:last
+    let @+ = @+ . ':' . a:first
+  else
+    let @+ = @+ . ':' . a:first . '-' . a:last
+  endif
+endfunction
+command! YankLine call YankRef(line('.'), line('.'))
+command! YankSel call YankRef(line("'<"), line("'>"))
+nnoremap <leader>yl :YankLine<CR>
+xnoremap <leader>yl <Esc>:YankSel<CR>
+nmap <leader>yp <Action>(CopyAbsolutePath)
+let g:WhichKeyDesc_yank = "<leader>y Yank reference"
+let g:WhichKeyDesc_yank_line = "<leader>yl Yank path:line (or path:start-end)"
+let g:WhichKeyDesc_yank_path = "<leader>yp Yank full path"
+
+" Tool windows
+nmap <leader>e <Action>(SelectInProjectView)
+nmap <leader>r <Action>(ActivateRunToolWindow)
+nmap <leader>d <Action>(ActivateDebugToolWindow)
+nmap <leader>G <Action>(ActivateVersionControlToolWindow)
+nmap <leader>o <Action>(ActivateStructureToolWindow)
+nmap <leader>x <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>h <Action>(HideAllWindows)
+let g:WhichKeyDesc_tool_project = "<leader>e Project tree (reveal file)"
+let g:WhichKeyDesc_tool_run = "<leader>r Run window"
+let g:WhichKeyDesc_tool_debug = "<leader>d Debug window"
+let g:WhichKeyDesc_tool_git = "<leader>G Git window"
+let g:WhichKeyDesc_tool_structure = "<leader>o Structure window"
+let g:WhichKeyDesc_tool_problems = "<leader>x Problems window"
+let g:WhichKeyDesc_tool_hide = "<leader>h Hide all tool windows"
